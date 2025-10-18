@@ -26,12 +26,37 @@ public class Main {
             "join endeavour_test_area.department_pra on departmentid = department_id";
 
     public static void main(String[] args) {
+
+
+
 //1.
 //        StockFundamentalsDao dao = new StockFundamentalsDao();
 //        List<StocksFundamentals> list = dao.getAllStockFundamentals();
 //
 //        list.forEach(System.out::println);
-//4.
+
+
+
+        StocksPriceHistoryDao dao = new StocksPriceHistoryDao();
+
+        int pageSize = 50;  // Records per page
+        int totalPages = 5; // For example, first 5 pages
+
+        for (int page = 1; page <= totalPages; page++) {
+            System.out.println("\n Page " + page + " --------------------");
+
+            List<StockPriceHistory> stocks = dao.getAllStocks(page, pageSize);
+            if (stocks.isEmpty()) {
+                System.out.println("No more records.");
+                break;
+            }
+
+            for (StockPriceHistory s : stocks) {
+                System.out.println(
+                        s.getTickerSymbol()+" : "+ s.getClosePrice()+" : "+ s.getVolume()+" : "+ s.getDate());
+            }
+        }
+//4.==========================================================================================
 //        StocksPriceHistoryDao dao = new StocksPriceHistoryDao();
 //        List<StockPriceHistory> stocks = dao.getAllStocks();
 //
@@ -81,12 +106,13 @@ public class Main {
 //        List<Employee> demon = GetDataSP();
 //        for(Employee emp: demon){
 //            System.out.println(emp.getId()+" - "+emp.getFullname());
-//        }
+//==============================================================================
+        //GetDataSPCallable-->Calling with Dept Id
 
-        List<Employee> demon2 = GetDataSPCallable(6);
-        for(Employee emp: demon2){
-            System.out.println(emp.getId()+" - "+emp.getFullname()+" "+emp.getDeptid());
-        }
+//        List<Employee> demon2 = GetDataSPCallable(6);
+//        for(Employee emp: demon2){
+//            System.out.println(emp.getId()+" - "+emp.getFullname()+" "+emp.getDeptid());
+//        }
 
 
 
